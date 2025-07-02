@@ -2,7 +2,7 @@ package com.taxibooking.taxibooking.controller;
 
 import com.taxibooking.taxibooking.model.BookingForm;
 import com.taxibooking.taxibooking.model.ContactForm;
-import com.taxibooking.taxibooking.service.ContactFormImpl;
+import com.taxibooking.taxibooking.service.BookingFormService;
 import com.taxibooking.taxibooking.service.ContactFormService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -19,11 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class MyController {
 
 
+    @Autowired
     private ContactFormService contactFormService;
     @Autowired
-    public MyController(ContactFormService contactFormService) {
-        this.contactFormService = contactFormService;
-    }
+    private BookingFormService bookingFormService;
 
 
 
@@ -87,20 +86,26 @@ public class MyController {
             BindingResult bindingResult,
             Model m,
             RedirectAttributes redirectAttributes) {
+        if(bindingResult.hasErrors()) {
+            m.addAttribute("bindingResult", bindingResult);
+            return "index";
+        }
 
         if (bookingForm.getAdult() + bookingForm.getChildren() > 4) {
             m.addAttribute("message", "The total number of adults and children cannot exceed 4.");
             return "index";
         }
 
-        if (bindingResult.hasErrors()) {
+//
 
-            return "index";
+        BookingForm  saveBookingFormService =  bookingFormService.saveBookingFormService(bookingForm);
+        if(saveBookingFormService != null) {
+            redirectAttributes.addFlashAttribute("message", "Booking form submitted successfully!");
+        }else{
+            redirectAttributes.addFlashAttribute("message", "Something went wrong. Please try again.");
         }
-
-        System.out.println("Booking successful: " + bookingForm);
-        redirectAttributes.addFlashAttribute("success", "Booking successful!");
         return "redirect:/index";
+
     }
 
 
