@@ -88,21 +88,19 @@ public class MyController {
             Model m,
             RedirectAttributes redirectAttributes) {
 
-        // Form-level validation
         if (bookingForm.getAdult() + bookingForm.getChildren() > 4) {
             m.addAttribute("message", "The total number of adults and children cannot exceed 4.");
-            return "index"; // render view again with same URL (/bookingform)
+            return "index";
         }
 
-        // JSR-303 validation errors
         if (bindingResult.hasErrors()) {
-            return "index"; // render view again with same URL (/bookingform)
+
+            return "index";
         }
 
-        // Save logic (if any), then redirect
         System.out.println("Booking successful: " + bookingForm);
         redirectAttributes.addFlashAttribute("success", "Booking successful!");
-        return "redirect:/index"; // redirect after success (PRG)
+        return "redirect:/index";
     }
 
 
