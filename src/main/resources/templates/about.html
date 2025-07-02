@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>About</title>
+	<meta charset="utf-8">
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="icon" href="images/favicon.ico">
+	<link rel="shortcut icon" href="images/favicon.ico" />
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery-migrate-1.2.1.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/superfish.js"></script>
+	<script src="js/jquery.ui.totop.js"></script>
+	<script src="js/jquery.equalheights.js"></script>
+	<script src="js/jquery.mobilemenu.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script>
+		$(document).ready(function(){
+            $().UItoTop({ easingType: 'easeOutQuart' });
+        });
+	</script>
+	<!--[if lt IE 8]>
+	<div style=' clear: both; text-align:center; position: relative;'>
+		<a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+			<img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+		</a>
+	</div>
+	<![endif]-->
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<link rel="stylesheet" media="screen" href="css/ie.css">
+	<![endif]-->
+</head>
+<body class="" id="top">
+<div class="main">
+	<!--==============================header=================================-->
+	<div th:insert="~{fragment/header.html}"></div>
+
+	<!--==============================Content=================================-->
+	<div class="content"><div class="ic">Taxi Booking App - GLA University Project</div>
+		<div class="container_12">
+			<div class="grid_7">
+				<h3>About Our Taxi Booking App</h3>
+				<img src="images/page2_img1.jpg" alt="" class="img_inner fleft">
+				<div class="extra_wrapper">
+					<div class="text1 color2">
+						<a href="#">Reliable Rides, Anytime, Anywhere</a>
+					</div>
+					<p>Welcome to our smart Taxi Booking App — a solution designed to make travel convenient, safe, and affordable. Whether it's a city ride, airport transfer, or an outstation journey, we ensure a hassle-free experience at your fingertips.</p>
+					<p>We utilize secure sessions to enhance your experience. Once logged in, users can book cabs, view past bookings, schedule future rides, and more — all in a secure and personalized environment.</p>
+				</div>
+				<div class="clear cl1"></div>
+				<p>Our mission is to deliver quality transportation solutions with trusted drivers, transparent pricing, and 24/7 availability. We take care of session management, so your activity is protected and your preferences are remembered as long as your session is active.</p>
+				<p>Session timeout is applied after a period of inactivity to ensure data security. You can always log in again to continue using the service without interruption.</p>
+			</div>
+
+			<div class="grid_4 prefix_1">
+				<h3>Why Choose Us</h3>
+				<ul class="list li">
+					<li class="list_count">1</li>
+					<li class="extra_wrapper">
+						<div class="text1 color2"><a href="#">Instant Booking</a></div>
+						Book your cab in seconds with real-time driver assignment.
+					</li>
+				</ul>
+				<ul class="list li">
+					<li class="list_count">2</li>
+					<li class="extra_wrapper">
+						<div class="text1 color2"><a href="#">Secure User Sessions</a></div>
+						Your login and activity are protected using session-based authentication.
+					</li>
+				</ul>
+				<ul class="list li">
+					<li class="list_count">3</li>
+					<li class="extra_wrapper">
+						<div class="text1 color2"><a href="#">Live Tracking</a></div>
+						Track your cab in real-time with GPS for added safety and transparency.
+					</li>
+				</ul>
+				<ul class="list li">
+					<li class="list_count">4</li>
+					<li class="extra_wrapper">
+						<div class="text1 color2"><a href="#">Multiple Ride Options</a></div>
+						Choose from hatchbacks, sedans, SUVs, or luxury cars as per your need.
+					</li>
+				</ul>
+				<ul class="list li">
+					<li class="list_count">5</li>
+					<li class="extra_wrapper">
+						<div class="text1 color2"><a href="#">24/7 Customer Support</a></div>
+						We’re available round the clock for any assistance you need.
+					</li>
+				</ul>
+			</div>
+
+			<div class="clear"></div>
+
+			<div class="grid_12">
+				<h3 class="h3__ind1">Testimonials</h3>
+			</div>
+			<div class="grid_4">
+				<blockquote class="bq1">
+					<p><i>The app is super easy to use. I scheduled a cab to the airport and it arrived right on time. Highly recommended!</i></p>
+					<div class="color2">Rohit Sharma</div>
+				</blockquote>
+			</div>
+			<div class="grid_4">
+				<blockquote class="bq1">
+					<p><i>I love how the app remembers my favorite locations and past bookings. The live tracking feature is awesome!</i></p>
+					<div class="color2">Priya Mehta</div>
+				</blockquote>
+			</div>
+			<div class="grid_4">
+				<blockquote class="bq1">
+					<p><i>Very helpful for long-distance rides. I felt safe and the pricing was transparent. Will use it again.</i></p>
+					<div class="color2">Ankit Verma</div>
+				</blockquote>
+			</div>
+
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+
+<!--==============================footer=================================-->
+<div th:insert="~{fragment/footer.html}"></div>
+
+</body>
+</html>
