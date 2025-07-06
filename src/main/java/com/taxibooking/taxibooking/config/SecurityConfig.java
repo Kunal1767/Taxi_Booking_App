@@ -28,6 +28,9 @@ public class SecurityConfig {
                         .requestMatchers("/**").permitAll()
                 )
                 .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/admin/dashboard", true)
+                        .failureUrl("/login?error=true")
                                 .permitAll()
                 )
                 .logout(logout -> logout

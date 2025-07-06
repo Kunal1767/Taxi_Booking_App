@@ -4,6 +4,7 @@ import com.taxibooking.taxibooking.model.BookingForm;
 import com.taxibooking.taxibooking.model.ContactForm;
 import com.taxibooking.taxibooking.service.BookingFormService;
 import com.taxibooking.taxibooking.service.ContactFormService;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +107,16 @@ public class MyController {
         }
         return "redirect:/index";
 
+    }
+    @GetMapping("/login")
+    public String adminloginView(HttpServletRequest request, Model m) {
+        ServletContext servletContext = request.getServletContext();
+        Object Attribute = servletContext.getAttribute("logout");
+        if (Attribute instanceof Boolean) {
+            m.addAttribute("logout", Attribute);
+            servletContext.removeAttribute("logout");
+        }
+        return "adminlogin";
     }
 
 
