@@ -5,6 +5,8 @@ import com.taxibooking.taxibooking.model.BookingForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookingFormServiceImpl implements BookingFormService{
 
@@ -13,5 +15,15 @@ public class BookingFormServiceImpl implements BookingFormService{
     @Override
     public BookingForm saveBookingFormService(BookingForm bookingForm) {
             return bookingFormCrud.save(bookingForm);
+    }
+
+    @Override
+    public List<BookingForm> readAllBookingService() {
+        return bookingFormCrud.findAll();
+    }
+
+    @Override
+    public void deleteBookingService(int id) {
+        bookingFormCrud.deleteById(id);
     }
 }

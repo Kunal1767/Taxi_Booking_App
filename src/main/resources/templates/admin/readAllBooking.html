@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Contacts - Admin Panel</title>
+    <title>All Bookings - Admin Panel</title>
     <style>
         * {
             margin: 0;
@@ -33,7 +33,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -161,6 +161,7 @@
             width: 100%;
             border-collapse: collapse;
             background: white;
+            min-width: 1000px;
         }
 
         th {
@@ -242,6 +243,49 @@
             margin-bottom: 1rem;
         }
 
+        .comfort-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .comfort-standard {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .comfort-premium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .comfort-luxury {
+            background: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        .date-cell {
+            white-space: nowrap;
+        }
+
+        .email-cell {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .message-cell {
+            max-width: 250px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
@@ -292,19 +336,19 @@
 </head>
 <body>
 <header class="header">
-    <h1>Contact Management</h1>
+    <h1>Booking Management</h1>
 </header>
 
 <div class="container">
     <div class="page-content">
-        <h1 class="page-title">All Contacts</h1>
+        <h1 class="page-title">All Bookings</h1>
 
         <div class="status-card">
-            <p><strong>Status:</strong> <span class="status-highlight" th:text="${message}">Contacts loaded successfully</span></p>
-            <p th:if="${#lists.isEmpty(allcontacts)}">No contacts found.</p>
-            <p th:unless="${#lists.isEmpty(allcontacts)}">
-                <strong>Total Contacts:</strong>
-                <span class="status-highlight" th:text="${#lists.size(allcontacts)}">3</span>
+            <p><strong>Status:</strong> <span class="status-highlight" th:text="${message}">Bookings loaded successfully</span></p>
+            <p th:if="${#lists.isEmpty(allBookings)}">No bookings found.</p>
+            <p th:unless="${#lists.isEmpty(allBookings)}">
+                <strong>Total Bookings:</strong>
+                <span class="status-highlight" th:text="${#lists.size(allBookings)}">5</span>
             </p>
         </div>
 
@@ -313,13 +357,13 @@
                 <span class="nav-btn-icon">🏠</span>
                 Back to Dashboard
             </a>
-            <a th:href="@{/admin/readAllContacts}" class="nav-btn success">
+            <a th:href="@{/admin/readAllBookings}" class="nav-btn success">
                 <span class="nav-btn-icon">🔄</span>
                 Refresh
             </a>
-            <a th:href="@{/admin/readAllBookings}" class="nav-btn secondary">
+            <a th:href="@{/admin/readAllContacts}" class="nav-btn secondary">
                 <span class="nav-btn-icon">📧</span>
-                View Bookings
+                View Contacts
             </a>
             <a th:href="@{/logout}" class="nav-btn danger">
                 <span class="nav-btn-icon">🚪</span>
@@ -332,29 +376,40 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Date</th>
+                    <th>Adults</th>
+                    <th>Children</th>
+                    <th>Comfort</th>
                     <th>Email</th>
                     <th>Message</th>
-                    <th>Phone</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="contact : ${allcontacts}">
-                    <td th:text="${contact.id}">1</td>
-                    <td th:text="${contact.name}">John Doe</td>
-                    <td th:text="${contact.email}">john.doe@example.com</td>
-                    <td th:text="${contact.message}">Hello, I need help with my booking...</td>
-                    <td th:text="${contact.phone}">+1 234 567 8901</td>
+                <tr th:each="booking : ${allBookings}">
+                    <td th:text="${booking.id}">1</td>
+                    <td th:text="${booking.from}">New York</td>
+                    <td th:text="${booking.to}">Los Angeles</td>
+                    <td class="date-cell" th:text="${booking.date}">2024-01-15</td>
+                    <td th:text="${booking.adult}">2</td>
+                    <td th:text="${booking.children}">1</td>
                     <td>
-                        <a th:href="@{/admin/deleteContact/{id} (id=${contact.id})}"
+                        <span class="comfort-badge comfort-standard"
+                              th:classappend="${booking.comfort == 'Premium'} ? 'comfort-premium' : (${booking.comfort == 'Luxury'} ? 'comfort-luxury' : 'comfort-standard')"
+                              th:text="${booking.comfort}">Standard</span>
+                    </td>
+                    <td class="email-cell" th:text="${booking.email}" th:title="${booking.email}">john.doe@example.com</td>
+                    <td class="message-cell" th:text="${booking.message}" th:title="${booking.message}">Looking forward to this trip...</td>
+                    <td>
+                        <a th:href="@{/admin/deleteBooking/{id} (id=${booking.id})}"
                            class="delete-btn"
-                           onclick="return confirm('Are you sure you want to delete this contact?')">
+                           onclick="return confirm('Are you sure you want to delete this booking?')">
                             🗑️ Delete
                         </a>
                     </td>
                 </tr>
-
                 </tbody>
             </table>
         </div>
@@ -366,7 +421,7 @@
         const deleteButtons = document.querySelectorAll('.delete-btn');
         deleteButtons.forEach(button => {
             button.addEventListener('click', function(e) {
-                if (!confirm('Are you sure you want to delete this contact? This action cannot be undone.')) {
+                if (!confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
                     e.preventDefault();
                 }
             });

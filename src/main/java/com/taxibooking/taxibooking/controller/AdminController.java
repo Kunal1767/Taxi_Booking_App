@@ -1,5 +1,6 @@
 package com.taxibooking.taxibooking.controller;
 
+import com.taxibooking.taxibooking.model.BookingForm;
 import com.taxibooking.taxibooking.model.ContactForm;
 import com.taxibooking.taxibooking.service.BookingFormService;
 import com.taxibooking.taxibooking.service.ContactFormService;
@@ -40,6 +41,18 @@ public class AdminController {
         contactFormService.deleteContactService(id);
         redirectAttributes.addFlashAttribute("message", "Contact deleted successfully!");
         return "redirect:/admin/readAllContacts";
+    }
+    @GetMapping("/readAllBookings")
+    public String readAllBookings(Model m) {
+    List<BookingForm> allBookings = bookingFormService.readAllBookingService();
+        m.addAttribute("allBookings", allBookings);
+        return "admin/readAllBooking";
+    }
+    @GetMapping("/deleteBooking/{id}")
+    public String deleteBooking(@PathVariable int id, RedirectAttributes redirectAttributes) {
+        bookingFormService.deleteBookingService(id);
+        redirectAttributes.addFlashAttribute("message", "Booking deleted successfully!");
+        return "redirect:/admin/readAllBookings";
     }
 
 }
