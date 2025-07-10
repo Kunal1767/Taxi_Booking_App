@@ -1,15 +1,13 @@
 package com.taxibooking.taxibooking.controller;
 
-import com.taxibooking.taxibooking.model.BookingForm;
-import com.taxibooking.taxibooking.model.ContactForm;
+import com.taxibooking.taxibooking.entity.BookingForm;
+import com.taxibooking.taxibooking.service.AdminCredentialsService;
 import com.taxibooking.taxibooking.service.BookingFormService;
 import com.taxibooking.taxibooking.service.ContactFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -23,7 +21,8 @@ public class AdminController {
     @Autowired
     private BookingFormService bookingFormService;
 
-
+    @Autowired
+    private AdminCredentialsService adminCredentialsService;
 
     @GetMapping("/dashboard")
     public String adminDashboard() {
@@ -53,6 +52,27 @@ public class AdminController {
         bookingFormService.deleteBookingService(id);
         redirectAttributes.addFlashAttribute("message", "Booking deleted successfully!");
         return "redirect:/admin/readAllBookings";
+    }
+    @GetMapping("/changeCredentials")
+    public String changeCredentialsView() {
+        return "admin/changecredentials";
+    }
+    @PostMapping("/changeCredentials")
+    public String changeCredentials(
+            @RequestParam("oldusername") String oldusername,
+            @RequestParam("oldpassword") String oldpassword,
+            @RequestParam("newusername") String newusername,
+            @RequestParam("newpassword") String newpassword,
+            RedirectAttributes redirectAttributes) {
+        String result=   adminCredentialsService.checkAdminCredentials(oldusername, oldpassword);
+        System.out.println(result);
+        if(result.equals("Success")) {
+            result =adminCredentialsService.updateAdminCredentials(newusername, newpassword, oldusername);
+            redirectAttributes.addFlashAttribute("message", result);
+
+        } else {
+            redirectAttributes.addFlashAttribute("message",    result);    }
+        return "redirect:/admin/dashboard";
     }
 
 }

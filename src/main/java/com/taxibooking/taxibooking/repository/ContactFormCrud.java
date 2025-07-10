@@ -1,10 +1,8 @@
-package com.taxibooking.taxibooking.dao;
+package com.taxibooking.taxibooking.repository;
 
-import com.taxibooking.taxibooking.model.ContactForm;
+import com.taxibooking.taxibooking.entity.ContactForm;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface ContactFormCrud extends JpaRepository<ContactForm, Integer> {

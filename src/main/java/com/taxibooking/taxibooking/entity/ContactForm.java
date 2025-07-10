@@ -1,4 +1,4 @@
-package com.taxibooking.taxibooking.model;
+package com.taxibooking.taxibooking.entity;
 
 
 import jakarta.persistence.*;

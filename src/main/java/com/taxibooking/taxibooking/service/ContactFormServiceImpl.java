@@ -1,7 +1,7 @@
 package com.taxibooking.taxibooking.service;
 
-import com.taxibooking.taxibooking.dao.ContactFormCrud;
-import com.taxibooking.taxibooking.model.ContactForm;
+import com.taxibooking.taxibooking.repository.ContactFormCrud;
+import com.taxibooking.taxibooking.entity.ContactForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

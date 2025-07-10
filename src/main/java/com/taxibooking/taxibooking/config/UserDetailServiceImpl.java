@@ -1,7 +1,7 @@
 package com.taxibooking.taxibooking.config;
 
-import com.taxibooking.taxibooking.dao.AdminDao;
-import com.taxibooking.taxibooking.model.Admin;
+import com.taxibooking.taxibooking.repository.AdminDao;
+import com.taxibooking.taxibooking.entity.Admin;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;

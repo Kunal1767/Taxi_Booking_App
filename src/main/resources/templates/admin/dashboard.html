@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -181,6 +181,7 @@
     <div class="dashboard-card">
         <h2 class="dashboard-title">Management Dashboard</h2>
 
+        <h2 th:text="${message}"></h2>
         <div class="nav-grid">
             <a href="readAllContacts" class="nav-item">
                 <span class="nav-icon">📧</span>
@@ -195,6 +196,12 @@
                 <div>
                     <div>Read all Bookings</div>
                     <small style="color: #64748b;">View reservation details</small>
+                </div>
+            </a>
+            <a href="changeCredentials" class="nav-item">
+                <span class="nav-icon">📅</span>
+                <div>
+                    <div>Change Credentials</div>
                 </div>
             </a>
         </div>

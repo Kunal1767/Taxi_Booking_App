@@ -1,7 +1,6 @@
 package com.taxibooking.taxibooking.service;
 
-import com.taxibooking.taxibooking.model.BookingForm;
-import com.taxibooking.taxibooking.model.ContactForm;
+import com.taxibooking.taxibooking.entity.BookingForm;
 
 import java.util.List;
 

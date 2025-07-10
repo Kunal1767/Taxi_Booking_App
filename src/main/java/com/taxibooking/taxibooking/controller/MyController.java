@@ -1,7 +1,7 @@
 package com.taxibooking.taxibooking.controller;
 
-import com.taxibooking.taxibooking.model.BookingForm;
-import com.taxibooking.taxibooking.model.ContactForm;
+import com.taxibooking.taxibooking.entity.BookingForm;
+import com.taxibooking.taxibooking.entity.ContactForm;
 import com.taxibooking.taxibooking.service.BookingFormService;
 import com.taxibooking.taxibooking.service.ContactFormService;
 import jakarta.servlet.ServletContext;
@@ -19,12 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class MyController {
 
-
     @Autowired
     private ContactFormService contactFormService;
     @Autowired
     private BookingFormService bookingFormService;
-
 
 
     @GetMapping(path = {"/", "/home", "/index", "/welcome"})
@@ -65,7 +63,6 @@ public class MyController {
     }
 
 
-
     @PostMapping("contactform")
     public String contactform(@Valid @ModelAttribute ContactForm contactForm, BindingResult bindingResult, Model m, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
@@ -96,8 +93,6 @@ public class MyController {
             m.addAttribute("message", "The total number of adults and children cannot exceed 4.");
             return "index";
         }
-
-//
 
         BookingForm  saveBookingFormService =  bookingFormService.saveBookingFormService(bookingForm);
         if(saveBookingFormService != null) {
