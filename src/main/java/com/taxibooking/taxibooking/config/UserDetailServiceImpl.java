@@ -22,6 +22,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private AdminDao adminDao;
 
     @PostConstruct
+    // This method will run after the bean is created and will initialize the admin user if it doesn't exist
     public void init(){
        long count = adminDao.count();
        if(count==0){
