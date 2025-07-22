@@ -56,6 +56,27 @@
             75% { transform: translateX(5px); }
         }
 
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .home-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
         .login-container {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -76,7 +97,7 @@
             left: 0;
             right: 0;
             height: 4px;
-<!--            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);-->
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
             border-radius: 20px 20px 0 0;
             background-size: 200% 100%;
             animation: gradient 3s ease infinite;
@@ -116,6 +137,7 @@
             animation: slideIn 0.5s ease-out;
             border-left: 4px solid;
             position: relative;
+            padding-left: 3rem;
         }
 
         .alert-error {
@@ -153,12 +175,12 @@
         }
 
         .alert-text {
-            margin-left: 2rem;
             font-size: 0.9rem;
         }
 
         .form-group {
             margin-bottom: 1.8rem;
+            position: relative;
         }
 
         .form-group label {
@@ -169,9 +191,38 @@
             font-size: 0.9rem;
         }
 
+        .input-icon {
+            position: relative;
+            display: block;
+        }
+
+        .input-icon::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1.2rem;
+            height: 1.2rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .input-icon.user::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23667eea'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' /%3E%3C/svg%3E");
+        }
+
+        .input-icon.password::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23667eea'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' /%3E%3C/svg%3E");
+        }
+
         .form-control {
             width: 100%;
             padding: 0.9rem;
+            padding-left: 3rem;
             border: 2px solid #e2e8f0;
             border-radius: 12px;
             font-size: 1rem;
@@ -186,6 +237,11 @@
             background: white;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
             transform: translateY(-1px);
+        }
+
+        .form-control:focus + .input-icon::before,
+        .input-icon:focus-within::before {
+            opacity: 1;
         }
 
         .form-control::placeholder {
@@ -252,41 +308,6 @@
             text-decoration: underline;
         }
 
-        .input-icon {
-            position: relative;
-        }
-
-        .input-icon input {
-            padding-left: 3rem;
-        }
-
-        .input-icon::before {
-            content: '';
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1.2rem;
-            height: 1.2rem;
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-
-        .input-icon input:focus + .input-icon::before,
-        .input-icon:focus-within::before {
-            opacity: 1;
-        }
-
-        .input-icon.user::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23667eea'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' /%3E%3C/svg%3E");
-        }
-
-        .input-icon.password::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23667eea'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' /%3E%3C/svg%3E");
-        }
-
         /* Remember me checkbox */
         .checkbox-group {
             display: flex;
@@ -314,6 +335,13 @@
             .login-header h1 {
                 font-size: 1.8rem;
             }
+
+            .home-btn {
+                top: 10px;
+                left: 10px;
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
         }
 
         .shake {
@@ -323,6 +351,8 @@
 </head>
 
 <body>
+<a href="/" class="home-btn">Back to Home</a>
+
 <div class="login-container">
     <!-- Error Message -->
     <div th:if="${param.error}" class="alert alert-error">
