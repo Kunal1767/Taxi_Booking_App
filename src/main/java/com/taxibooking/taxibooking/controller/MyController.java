@@ -2,8 +2,11 @@ package com.taxibooking.taxibooking.controller;
 
 import com.taxibooking.taxibooking.entity.BookingForm;
 import com.taxibooking.taxibooking.entity.ContactForm;
+import com.taxibooking.taxibooking.entity.ServiceForm;
 import com.taxibooking.taxibooking.service.BookingFormService;
 import com.taxibooking.taxibooking.service.ContactFormService;
+import com.taxibooking.taxibooking.service.ServiceFormService;
+import com.taxibooking.taxibooking.service.ServiceFormServiceImpl;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 public class MyController {
 
@@ -23,6 +28,8 @@ public class MyController {
     private ContactFormService contactFormService;
     @Autowired
     private BookingFormService bookingFormService;
+    @Autowired
+    private ServiceFormService serviceFormService;
 
 
     @GetMapping(path = {"/", "/home", "/index", "/welcome"})
@@ -51,6 +58,8 @@ public class MyController {
     public String servicesView(HttpServletRequest req, Model m) {
         String requestURI = req.getRequestURI();
         m.addAttribute("mycurrentpage", requestURI);
+        List<ServiceForm> allServices = serviceFormService.readAllService();
+        m.addAttribute("allServices", allServices);
         return "services";
     }
 

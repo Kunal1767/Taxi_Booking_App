@@ -1,13 +1,17 @@
 package com.taxibooking.taxibooking.controller;
 
 import com.taxibooking.taxibooking.entity.BookingForm;
+import com.taxibooking.taxibooking.entity.ServiceForm;
 import com.taxibooking.taxibooking.service.AdminCredentialsService;
 import com.taxibooking.taxibooking.service.BookingFormService;
 import com.taxibooking.taxibooking.service.ContactFormService;
+import com.taxibooking.taxibooking.service.ServiceFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -20,9 +24,11 @@ public class AdminController {
     private ContactFormService contactFormService;
     @Autowired
     private BookingFormService bookingFormService;
-
     @Autowired
     private AdminCredentialsService adminCredentialsService;
+    @Autowired
+    private ServiceFormService serviceFormService;
+
 
     @GetMapping("/dashboard")
     public String adminDashboard() {
@@ -73,6 +79,31 @@ public class AdminController {
         } else {
             redirectAttributes.addFlashAttribute("message",    result);    }
         return "redirect:/admin/dashboard";
+    }
+
+    @GetMapping("/addService")
+    public String addServiceView() {
+        return "admin/addService";
+    }
+    @InitBinder
+    public void stopBinding(WebDataBinder webDataBinder){
+        webDataBinder.setDisallowedFields("image");
+    }
+    @PostMapping("/addService")
+    public String addService(@ModelAttribute ServiceForm serviceForm,@RequestParam("image") MultipartFile multipartFile,RedirectAttributes redirectAttributes) {
+        String originalFilename = multipartFile.getOriginalFilename();
+        serviceForm.setImage(originalFilename);
+        try {
+            ServiceForm service = serviceFormService.addService(serviceForm, multipartFile);
+            if (service != null) {
+                redirectAttributes.addFlashAttribute("msg", "Service added successfully!");
+            } else {
+                redirectAttributes.addFlashAttribute("msg", "Failed to add service. Please try again.");
+            }
+        }catch (Exception e) {
+            redirectAttributes.addFlashAttribute("msg", "Error occurred while adding service: " + e.getMessage());
+        }
+        return "redirect:/admin/addService";
     }
 
 }
