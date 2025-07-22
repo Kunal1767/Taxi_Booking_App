@@ -19,7 +19,7 @@ public class CustomLogoutHandler implements LogoutHandler {
         try {
             ServletContext servletContext = request.getServletContext();
             servletContext.setAttribute("logout",true);
-            response.sendRedirect("admin/dashboard");
+            response.sendRedirect("/");
         } catch (IOException e) {
             e.printStackTrace();
         }
